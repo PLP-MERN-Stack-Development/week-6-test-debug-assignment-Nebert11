@@ -1,0 +1,25 @@
+# Dependency directories
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Build and coverage output
+coverage/
+client/coverage/
+server/coverage/
+
+# Cypress output
+cypress/videos/
+cypress/screenshots/
+client/cypress/videos/
+client/cypress/screenshots/
+
+# Lock files (optional, if you want to ignore them)
+# yarn.lock
+# package-lock.json
+# pnpm-lock.yaml
+
+# Misc
+.DS_Store
+.env
+.env.* 

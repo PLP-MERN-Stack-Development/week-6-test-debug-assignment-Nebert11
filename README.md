@@ -1,88 +1,95 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=19921178&assignment_repo_type=AssignmentRepo)
-# Testing and Debugging MERN Applications
+# MERN App Testing & Debugging Documentation
 
-This assignment focuses on implementing comprehensive testing strategies for a MERN stack application, including unit testing, integration testing, and end-to-end testing, along with debugging techniques.
+## 🧪 Testing Strategy
 
-## Assignment Overview
+### 1. Unit Testing
+- **Tools:** Jest (server & client), React Testing Library (client)
+- **Coverage:**
+  - Utility functions (e.g., `generateToken`)
+  - React components (e.g., `Button`, custom hooks like `useCounter`)
+  - Express middleware (e.g., `logger`)
+- **How to run:**
+  - Server: `pnpm test:unit` in `/server`
+  - Client: `pnpm test:unit` in `/client`
 
-You will:
-1. Set up testing environments for both client and server
-2. Write unit tests for React components and server functions
-3. Implement integration tests for API endpoints
-4. Create end-to-end tests for critical user flows
-5. Apply debugging techniques for common MERN stack issues
+### 2. Integration Testing
+- **Tools:** Jest, Supertest (server), React Testing Library (client)
+- **Coverage:**
+  - API endpoints (e.g., `/api/posts`)
+  - Database operations (using `mongodb-memory-server` for isolated test DB)
+  - React components that interact with APIs (e.g., `PostList`)
+- **How to run:**
+  - Server: `pnpm test:integration` in `/server`
+  - Client: `pnpm test:integration` in `/client`
 
-## Project Structure
+### 3. End-to-End (E2E) Testing
+- **Tools:** Cypress
+- **Coverage:**
+  - Critical user flows (e.g., homepage load, form submission)
+  - Navigation and routing
+  - Error handling and edge cases
+- **How to run:**
+  - `pnpm test:e2e` in `/client` (opens Cypress UI)
 
+### 4. Code Coverage
+- **How to check:**
+  - Run `pnpm test --coverage` in `/server` and `/client`
+  - Coverage threshold: ≥70% for statements, functions, lines (see `jest.config.js`)
+  - Include screenshots of coverage summary in your submission
+
+---
+
+## 🐞 Debugging Techniques
+
+### 1. Server-Side Logging
+- **Tool:** [morgan](https://www.npmjs.com/package/morgan)
+- **Usage:** Logs HTTP requests in the Express app (see `server/app.js`).
+
+### 2. Global Error Handler (Express)
+- **Usage:** Catches and logs errors, returns JSON error response (see `server/app.js`).
+
+### 3. React Error Boundary
+- **File:** `client/src/components/ErrorBoundary.jsx`
+- **Usage:** Wraps app/components to catch and display UI errors.
+
+### 4. Browser Developer Tools
+- **Usage:** Inspect elements, debug JS, monitor network, and profile performance in Chrome/Edge/Firefox DevTools.
+
+### 5. Performance Monitoring
+- **Client:** Use React Profiler, Lighthouse, browser DevTools
+- **Server:** Use logging, Node.js profilers, and monitor memory/CPU usage
+
+---
+
+## 📸 Screenshots
+- [ ] Add screenshots of your test coverage reports here (after running `pnpm test --coverage`)
+
+---
+
+## ✅ How to Run Tests
+
+### Server
+```sh
+cd server
+pnpm install
+pnpm test           # Run all tests
+pnpm test:unit      # Run unit tests
+pnpm test:integration # Run integration tests
 ```
-mern-testing/
-├── client/                 # React front-end
-│   ├── src/                # React source code
-│   │   ├── components/     # React components
-│   │   ├── tests/          # Client-side tests
-│   │   │   ├── unit/       # Unit tests
-│   │   │   └── integration/ # Integration tests
-│   │   └── App.jsx         # Main application component
-│   └── cypress/            # End-to-end tests
-├── server/                 # Express.js back-end
-│   ├── src/                # Server source code
-│   │   ├── controllers/    # Route controllers
-│   │   ├── models/         # Mongoose models
-│   │   ├── routes/         # API routes
-│   │   └── middleware/     # Custom middleware
-│   └── tests/              # Server-side tests
-│       ├── unit/           # Unit tests
-│       └── integration/    # Integration tests
-├── jest.config.js          # Jest configuration
-└── package.json            # Project dependencies
+
+### Client
+```sh
+cd client
+pnpm install
+pnpm test           # Run all tests
+pnpm test:unit      # Run unit tests
+pnpm test:integration # Run integration tests
+pnpm test:e2e       # Run Cypress E2E tests
 ```
 
-## Getting Started
+---
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week6-Assignment.md` file
-4. Explore the starter code and existing tests
-5. Complete the tasks outlined in the assignment
-
-## Files Included
-
-- `Week6-Assignment.md`: Detailed assignment instructions
-- Starter code for a MERN application with basic test setup:
-  - Sample React components with test files
-  - Express routes with test files
-  - Jest and testing library configurations
-  - Example tests for reference
-
-## Requirements
-
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- npm or yarn
-- Basic understanding of testing concepts
-
-## Testing Tools
-
-- Jest: JavaScript testing framework
-- React Testing Library: Testing utilities for React
-- Supertest: HTTP assertions for API testing
-- Cypress/Playwright: End-to-end testing framework
-- MongoDB Memory Server: In-memory MongoDB for testing
-
-## Submission
-
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
-
-1. Complete all required tests (unit, integration, and end-to-end)
-2. Achieve at least 70% code coverage for unit tests
-3. Document your testing strategy in the README.md
-4. Include screenshots of your test coverage reports
-5. Demonstrate debugging techniques in your code
-
-## Resources
-
-- [Jest Documentation](https://jestjs.io/docs/getting-started)
-- [React Testing Library Documentation](https://testing-library.com/docs/react-testing-library/intro/)
-- [Supertest Documentation](https://github.com/visionmedia/supertest)
-- [Cypress Documentation](https://docs.cypress.io/)
-- [MongoDB Testing Best Practices](https://www.mongodb.com/blog/post/mongodb-testing-best-practices) 
+## 📝 Notes
+- All tests are self-contained and use in-memory/mock data where possible.
+- Debugging tools and error boundaries are implemented for both client and server.
+- Update and expand tests as you add more features!

@@ -1,12 +1,14 @@
+jest.setTimeout(60000);
 // posts.test.js - Integration tests for posts API endpoints
 
 const request = require('supertest');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const app = require('../../src/app');
-const Post = require('../../src/models/Post');
-const User = require('../../src/models/User');
-const { generateToken } = require('../../src/utils/auth');
+const app = require('../../app');
+const Post = require('../../models/Post');
+const User = require('../../models/User');
+const { generateToken } = require('../../utils/auth');
+
 
 let mongoServer;
 let token;
@@ -42,7 +44,9 @@ beforeAll(async () => {
 // Clean up after all tests
 afterAll(async () => {
   await mongoose.disconnect();
-  await mongoServer.stop();
+  if (mongoServer) {
+    await mongoServer.stop();
+  }
 });
 
 // Clean up database between tests
